@@ -22,13 +22,24 @@ namespace Restaurants.Infrastructure.Respositories
         public async Task<IEnumerable<Restaurant>> GetAllAsync()
         {
            var restaurants = await restaurantDbContext.Restaurants.ToListAsync();
-            return restaurants;
+           return restaurants;
         }
 
         public async Task<Restaurant?> GetRestaurantByIdAsync(int id)
         {
             var restaurant = await restaurantDbContext.Restaurants.Include(r => r.Dishes).FirstOrDefaultAsync(r => r.Id == id);
             return restaurant;
+        }
+
+        public async Task DeleteAsync(Restaurant restaurant)
+        {
+            restaurantDbContext.Remove(restaurant);
+            await restaurantDbContext.SaveChangesAsync(); 
+        }
+
+        public async Task SaveChanges()
+        {
+            await restaurantDbContext.SaveChangesAsync();
         }
     }
 }

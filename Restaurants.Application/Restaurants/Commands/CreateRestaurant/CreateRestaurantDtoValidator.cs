@@ -3,12 +3,12 @@
 using FluentValidation;
 using Restaurants.Application.Restaurants.Dtos;
 
-namespace Restaurants.Application.Restaurants.Validators
+namespace Restaurants.Application.Restaurants.Commands.CreateRestaurant
 {
-    internal class CreateRestaurantDtoValidator: AbstractValidator<CreateRestaurantDto>
+    public class CreateRestaurantCommandValidator : AbstractValidator<CreateRestaurantCommand>
     {
         private readonly List<string> validCategories = ["mexican"];
-        public CreateRestaurantDtoValidator() 
+        public CreateRestaurantCommandValidator()
         {
             RuleFor(dto => dto.Name).NotEmpty().WithMessage("Name is required").Length(3, 100);
 
@@ -22,7 +22,7 @@ namespace Restaurants.Application.Restaurants.Validators
             //        context.AddFailure("Category", "Invalid category. Please select a valid category");
             //    }
             //}).NotEmpty().WithMessage("Category is required").Length(3, 100);   
-            
+
             RuleFor(dto => dto.Category).Must(category =>
             {
                 return validCategories.Contains(category);
