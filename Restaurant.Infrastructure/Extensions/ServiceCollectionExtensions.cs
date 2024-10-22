@@ -21,6 +21,7 @@ namespace Restaurants.Infrastructure.Extensions
             var connectionString = configuration.GetConnectionString("local");
             services.AddDbContext<RestaurantDbContext>(options => options.UseSqlServer(connectionString));
 
+            services.AddScoped<IDishesRepository, DishesRepository>();
             services.AddScoped<IRestaurantSeeder, RestaurantSeeder>();
             services.AddScoped<IRestaurantsRepository, RestaurantRepository>();
         }

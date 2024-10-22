@@ -4,7 +4,7 @@ using Restaurants.Domain.Entities;
 
 namespace Restaurants.Infrastructure.Persistence
 {
-    internal class RestaurantDbContext : DbContext
+    public class RestaurantDbContext : DbContext
     {
         public RestaurantDbContext(DbContextOptions<RestaurantDbContext> dbContextOptions): base(dbContextOptions)
         {
